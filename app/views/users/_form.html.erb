@@ -1,0 +1,64 @@
+    <%= simple_form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+            <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+            </ul>
+            </div>
+        <% end %>
+
+        <div class="field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
+        </div>
+        <div class="field">
+            <%= f.label :house_number %><br>
+            <%= f.number_field :house_number %>
+        </div>
+        <div class="field">
+            <%= f.label :phone %><br>
+            <%= f.telephone_field :phone %>
+        </div>
+        <div class="field">
+            <%= f.label :postcode %><br>
+            <%= f.text_field :postcode %>
+        </div>
+        <div class="field">
+            <%= f.label :destination_postcode %><br>
+            <%= f.text_field :destination_postcode %>
+        </div>
+
+        <div class="field">
+            <%= f.input :pickup_date, as: :datetime, start_year: Date.today.year, end_year: Date.today.year + 2, 'data-behaviour' => 'datepicker', order: [:day, :month, :year], use_short_month: true %>
+        </div>
+
+  
+        <p> Choose vehicle type and number required </p>
+
+        <div class="vehichle_select">
+  
+
+        <div class="taxi_photos">
+            <%= f.fields_for :vehichles do |vehichle| %>
+                <%= vehichle.label :saloon %>
+                <%= vehichle.select :quantity, [0, 1, 2, 3, 4, 5]%>
+                <%= image_tag("car baggage. saloon.jpg", size: "550x130") %>
+                <%= vehichle.hidden_field :name, :value => :saloon%>
+            <% end %>
+        </div>
+  
+        <div class="taxi_photos">
+            <%= f.fields_for :vehichles do |vehichle| %>
+                <%= vehichle.label :minibus %>
+                <%= vehichle.select :quantity, [0, 1, 2, 3, 4, 5]%>
+                <%= image_tag("car baggage MINIbus.jpg", size: "550x120") %>
+                <%= vehichle.hidden_field :name, :value => :minibus%>
+            <% end %>
+        </div>
+        <div class="actions">
+            <%= f.submit :"view cost" %>
+        </div>
+    <% end %>
