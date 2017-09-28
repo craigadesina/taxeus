@@ -1,0 +1,19 @@
+<%= form_for(@user) do |f| %>
+    
+   <div class="field">
+        <%= f.label :"Full Pickup Address" %><br>
+        <%= f.text_area :pick_address %>
+    </div>
+    <div class="field">
+        <%= f.label :"Full Destination Address" %><br>
+        <%= f.text_area :dest_address %>
+    </div>
+    <div class="field">
+        <%= f.label :"Flight number & arrival time at / from Airport if relevant" %><br>
+        <%= f.text_area :extra_info %>
+    </div>
+        <%= f.hidden_field :booked?, :value => true %>
+    <div class="actions">
+        <%= f.submit :"book my taxi!" %>
+    </div>
+<% end %>

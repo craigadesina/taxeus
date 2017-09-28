@@ -26,13 +26,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
 
-    params[:user][:house_number] = params[:user][:house_number].to_i
+    #params[:user][:house_number] = params[:user][:house_number].to_i
     
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'Here is your booking summary!' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +73,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :house_number, :phone, :postcode, :destination_postcode, :pickup_date, vehichles_attributes: [:name, :quantity])
+      params.require(:user).permit(:name, :house_number, :phone, :postcode, :destination_postcode, :pickup_date, :pick_address, :dest_address, :extra_info, :booked, vehichles_attributes: [:name, :quantity])
     end
 end
